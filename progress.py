@@ -35,7 +35,7 @@ class ProgressBar:
         pb = self.build_bar()
         td = 'Elapsed time: ' + self.time_diff(self.start_time, cur_time) \
                 if self.show_time else ''
-        sys.stderr.write(pb + td + ' '*(80 - len(pb) - len(td)))
+        sys.stderr.write(pb + td + ' '*(self.term_width - len(pb) - len(td)))
         sys.stderr.flush()
 
     def time_diff(self, s, e):
