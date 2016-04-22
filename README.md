@@ -1,7 +1,7 @@
 #Progress
 
-Python progress bar for those long `for` loops
-Designed to be fairly simple to use:
+Python progress bar for those long `for` loops.
+It's designed to be fairly simple to use:
 
 ```python
 from progress import ProgressBar
@@ -18,4 +18,4 @@ Output of the above looks like this:
 [#####               ] 25%, 36 it. Elapsed time: 29s
 ```
 
-Running `main.py` will show a few working examples with customized features
+Running `main.py` will show a few working examples with user-customizable features
