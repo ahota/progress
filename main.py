@@ -42,3 +42,13 @@ for i in my_list:
     sleep(0.3)
     pb.tick()
 pb.finish()
+
+print 'TEST: Using a bar with ETA'
+sleep(1.0)
+pb = ProgressBar(len(my_list), 20, show_eta=True)
+pb.start()
+for i in my_list:
+    sleep(0.5)
+    pb.tick()
+pb.finish()
+

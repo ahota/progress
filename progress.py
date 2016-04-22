@@ -3,7 +3,7 @@ import sys, time
 class ProgressBar:
     def __init__(self, iterations, bar_length, bookends='[]', bar_char='#',
             empty_char=' ', show_percent=True, show_iter=True, show_time=True,
-            term_width=80, job_name=''):
+            term_width=80, job_name='', show_eta=False):
         self.iterations   = iterations
         self.bar_length   = bar_length
         self.begin_char   = bookends[0:len(bookends)/2]
@@ -15,6 +15,7 @@ class ProgressBar:
         self.show_time    = show_time
         self.term_width   = term_width
         self.job_name     = job_name
+        self.show_eta     = show_eta
 
     def start(self):
         self.cur_tick = 0
@@ -33,23 +34,35 @@ class ProgressBar:
 
     def print_bar(self, cur_time):
         pb = self.build_bar()
-        td = 'Elapsed time: ' + self.time_diff(self.start_time, cur_time) \
-                if self.show_time else ''
+        td = ''
+        if self.show_eta and self.cur_tick > 0:
+            td += 'ETA: ' + self.calc_eta(cur_time)
+        else:
+            td += 'Elapsed time: ' + self.time_diff(self.start_time, cur_time) \
+                                     if self.show_time else ''
         sys.stderr.write(pb + td + ' '*(self.term_width - len(pb) - len(td)))
         sys.stderr.flush()
 
     def time_diff(self, s, e):
-        output = ''
         diff = int(e - s)
-        if diff > 3600:
-            hours = diff / 3600
-            diff = diff % 3600
+        return self.get_time_string(diff)
+
+    def calc_eta(self, c):
+        time_spent = c - self.start_time
+        iter_left  = self.iterations - self.cur_tick
+        return self.get_time_string(int(iter_left * time_spent/self.cur_tick))
+
+    def get_time_string(self, seconds):
+        output = ''
+        if seconds > 3600:
+            hours = seconds / 3600
+            seconds = seconds % 3600
             output += str(hours) + 'h, '
-        if diff > 60:
-            minutes = diff / 60
-            diff = diff % 60
+        if seconds > 60:
+            minutes = seconds / 60
+            seconds = seconds % 60
             output += str(minutes) + 'm, and '
-        output += str(diff) + 's'
+        output += str(seconds) + 's'
         return output
 
     def build_bar(self):
