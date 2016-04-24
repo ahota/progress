@@ -22,7 +22,7 @@ Or cutomize it:
 
 ```python
 pb = ProgressBar(len(my_list), 20, bookends='(||)', bar_char='/',
-                 job_name='Parse data', show_eta=True)
+                 job_name='Parse data', show_eta=True, show_iter=False)
 pb.start()
 for i in my_list:
     #do work
