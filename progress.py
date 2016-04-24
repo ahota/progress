@@ -113,6 +113,6 @@ class ProgressBar:
         empty = self.empty_char * (self.bar_length - len(bar))
         pb_string = '\r{0}{1}{2} {3}%{4}'.format(
                 self.begin_char, bar+empty, self.end_char,
-                int(round(percent*100)) if self.show_percent else '',
-                ', '+str(self.cur_tick)+' it. ' if self.show_iter else '')
+                int(round(percent*100)) if self.show_percent else ' ',
+                ', '+str(self.cur_tick)+' it. ' if self.show_iter else ' ')
         return pb_string
