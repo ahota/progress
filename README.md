@@ -18,4 +18,21 @@ Output of the above looks like this:
 [#####               ] 25%, 36 it. Elapsed time: 29s
 ```
 
+Or cutomize it:
+
+```python
+pb = ProgressBar(len(my_list), 20, bookends='(||)', bar_char='/',
+                 job_name='Parse data', show_eta=True)
+pb.start()
+for i in my_list:
+    #do work
+    pb.tick()
+pb.finish()
+```
+
+Which looks like this:
+```
+(|///////             |) 35% ETA: 39s
+```
+
 Running `main.py` will show a few working examples with user-customizable features
