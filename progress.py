@@ -58,6 +58,8 @@ class ProgressBar:
         """Tell the ProgressBar when to the loop is about to begin"""
         self.cur_tick = 0
         self.start_time = time.time()
+        if self.job_name != '':
+            print 'Starting', self.job_name
         self._print_bar(time.time())
 
     def finish(self):
