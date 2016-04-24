@@ -32,6 +32,7 @@ pb.finish()
 
 Which looks like this:
 ```
+Starting Parse data
 (|///////             |) 35% ETA: 39s
 ```
 
